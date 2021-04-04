@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule , HttpClientJsonpModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MainformComponent } from './components/mainform/mainform.component';
@@ -12,7 +12,8 @@ import { MainformComponent } from './components/mainform/mainform.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientJsonpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Position } from 'src/app/model/postiion';
 import { ChefService } from 'src/app/services/chef.service';
@@ -13,7 +13,7 @@ import { UserLocationService } from 'src/app/services/user-location.service';
 export class MainformComponent implements OnInit {
   errMsg: string;
   displayData = 'bangalore';
-  cityList = [];
+  cityList;
   chefList;
   tempList;
   formErr: string;
@@ -35,14 +35,17 @@ export class MainformComponent implements OnInit {
     }else{
       this.formErr = '';
       this.errMsg = '';
-      this.cityList = [];
+      
       this.locationSer.getCity(inputEle.value).subscribe((data) => {
         console.log(data);
-        this.tempList = data;
-        this.tempList.map(val => {
-          this.cityList.push(val);
+        this.cityList = data;
+      //   this.tempList.map(val => {
+
+      //     this.cityList.push(val);
+      //     console.log(this.cityList);
+      //   });
         });
-      });
+ 
     }
   }
 

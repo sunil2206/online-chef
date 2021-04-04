@@ -14,9 +14,10 @@ export class MainformComponent implements OnInit {
   errMsg: string;
   displayData = 'bangalore';
   cityList;
-  userPosition = new Position();
   chefList;
-  chefListErr;
+  formErr: string;
+  chefListErr: string;
+  userPosition = new Position();
   constructor(
     private locationSer: UserLocationService,
     private chefSer: ChefService,
@@ -28,21 +29,34 @@ export class MainformComponent implements OnInit {
   }
 
   viewData(inputEle: HTMLInputElement): void{
-    this.errMsg = '';
-    this.locationSer.getCity(inputEle.value).subscribe((data) => {
-      this.cityList = data;
-    });
+    if(inputEle.value.length < 3){
+      this.formErr = 'miminum 3 charcters required.';
+    }else{
+      this.formErr = '';
+      this.errMsg = '';
+      this.locationSer.getCity(inputEle.value).subscribe((data) => {
+        this.cityList = data;
+      });
+    }
   }
 
   getCurrentLocation(): void{
+      this.formErr = '';
       this.errMsg = '';
+      let tempObj;
       navigator.geolocation.getCurrentPosition(data => {
         this.userPosition.latitude = data.coords.latitude;
         this.userPosition.lognitude = data.coords.longitude;
+        this.httpClient.get(`https://api.opencagedata.com/geocode/v1/json?q=${this.userPosition.latitude},${this.userPosition.lognitude}&key=7f43792cfe0e41cba73988504451e191`).subscribe(data => {
+          tempObj = data;
+          let str = tempObj.results[0].formatted.split(',');
+          this.displayData = str[0] + str[1];
+        });
+
         this.chefSer.getChefList(this.userPosition).subscribe((res) => {
 
           if (res.data.response.length === 0){
-            this.chefListErr = 'no chefs found';
+            this.chefListErr = 'No chefs found for this location!!!';
             console.log('no chefs found');
           }else{
             this.chefListErr = '';
@@ -58,6 +72,7 @@ export class MainformComponent implements OnInit {
   }
 
   getData(inpData: string): void{
+    this.formErr = '';
     this.errMsg = '';
     let arr = inpData.split(',');
     this.displayData = arr[0];

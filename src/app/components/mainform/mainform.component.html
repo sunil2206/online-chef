@@ -1,8 +1,14 @@
 <div class="col col-12 alert alert-danger d-flex justify-content-center" *ngIf="errMsg">
   {{ errMsg }}
 </div>
+
 <div class="container d-flex justify-content-center wrapper">
   <form ngModel="form1" novalidate="true">
+    <div class="row d-flex justify-content-center form-wrapper mt-2"> 
+      <div *ngIf="formErr" class="col-sm mb-2 form-group text-danger">
+        {{ formErr }}
+      </div> 
+    </div>
     <div class="row d-flex justify-content-center form-wrapper mt-2">      
         
         <div class="col-md mb-2 form-group">
@@ -17,7 +23,7 @@
         <div class="col-md">
           <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div class="dropdown-menu" >
-            <a class="dropdown-item bg-warning" *ngIf="chefListErr"> {{ chefListErr }}</a> 
+            <a class="dropdown-item text-danger text-sm" *ngIf="chefListErr"> {{ chefListErr }}</a> 
             <div *ngFor="let chef of chefList">
               <a class="dropdown-item" ><span class="firstname">{{ (chef.firstName )}}</span> <span class="lastname">{{ (chef.lastName )}}</span></a>
             </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Position } from '../model/postiion';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,8 @@ export class UserLocationService {
   }
 
   getCity(queryTxt: string): Observable<object>{
-    return this.httpClient.get(`http://localhost:4200/api?key=7c756203dbb38590a66e01a5a3e1ad96&q=${queryTxt}`);
+    return this.httpClient.get(`${environment.hostUrl}/api?key=7c756203dbb38590a66e01a5a3e1ad96&q=${queryTxt}`);
   }
 
-  
 }
 

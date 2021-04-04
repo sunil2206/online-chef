@@ -13,8 +13,9 @@ import { UserLocationService } from 'src/app/services/user-location.service';
 export class MainformComponent implements OnInit {
   errMsg: string;
   displayData = 'bangalore';
-  cityList;
+  cityList = [];
   chefList;
+  tempList;
   formErr: string;
   chefListErr: string;
   userPosition = new Position();
@@ -34,8 +35,13 @@ export class MainformComponent implements OnInit {
     }else{
       this.formErr = '';
       this.errMsg = '';
+      this.cityList = [];
       this.locationSer.getCity(inputEle.value).subscribe((data) => {
-        this.cityList = data;
+        console.log(data);
+        this.tempList = data;
+        this.tempList.map(val => {
+          this.cityList.push(val);
+        });
       });
     }
   }

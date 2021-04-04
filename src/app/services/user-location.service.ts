@@ -18,6 +18,7 @@ export class UserLocationService {
   }
 
   getCity(queryTxt: string): Observable<object>{
+    console.log(`${environment.hostUrl}/api?key=7c756203dbb38590a66e01a5a3e1ad96&q=${queryTxt}`);
     return this.httpClient.get(`${environment.hostUrl}/api?key=7c756203dbb38590a66e01a5a3e1ad96&q=${queryTxt}`);
   }
 

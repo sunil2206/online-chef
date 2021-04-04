@@ -17,10 +17,8 @@ export class UserLocationService {
     return this.httpClient.get(`https://api.opencagedata.com/geocode/v1/json?q=${cityName}&key=7f43792cfe0e41cba73988504451e191`);
   }
 
-  getCity(queryTxt: string){
-
-    console.log(`${environment.hostUrl}/api?key=7c756203dbb38590a66e01a5a3e1ad96&q=${queryTxt}`);
-    return this.httpClient.jsonp(`${environment.hostUrl}/api?key=7c756203dbb38590a66e01a5a3e1ad96&q=${queryTxt}`,'callback');
+  getCity(queryTxt: string): Observable<object>{
+    return this.httpClient.get(`${environment.hostUrl}/api?key=7c756203dbb38590a66e01a5a3e1ad96&q=${queryTxt}`);
   }
 
 }

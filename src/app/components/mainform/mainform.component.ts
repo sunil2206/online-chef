@@ -37,13 +37,7 @@ export class MainformComponent implements OnInit {
       this.errMsg = '';
       
       this.locationSer.getCity(inputEle.value).subscribe((data) => {
-        console.log(data);
         this.cityList = data;
-      //   this.tempList.map(val => {
-
-      //     this.cityList.push(val);
-      //     console.log(this.cityList);
-      //   });
         });
  
     }

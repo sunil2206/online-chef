@@ -70,7 +70,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "onlineFood:build:production"
+              "browserTarget": "onlineFood:build:production",
+              "proxyConfig": "./proxy.conf.json"
             }
           }
         },
